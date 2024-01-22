@@ -5,16 +5,24 @@
 
 require '../helpers.php';
 
-$uri=$_SERVER['REQUEST_URI'];
-$method=$_SERVER['REQUEST_METHOD'];
+require basepath('Router.php');
+require basepath('Database.php');
+
+
+
+
 
 // inspect($method);
 
-require basepath('Router.php');
+
 // require basepath('\views\home.view.php');
 // loadView("home");
 $router=new Router();
 $routes=require basepath('routes.php');
+
+
+$uri=$_SERVER['REQUEST_URI'];
+$method=$_SERVER['REQUEST_METHOD'];
 
 $router->route($uri,$method);
 
