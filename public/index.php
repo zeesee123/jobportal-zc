@@ -6,10 +6,17 @@
 require '../helpers.php';
 
 $uri=$_SERVER['REQUEST_URI'];
+$method=$_SERVER['REQUEST_METHOD'];
 
-require basepath('router.php');
+// inspect($method);
+
+require basepath('Router.php');
 // require basepath('\views\home.view.php');
 // loadView("home");
+$router=new Router();
+$routes=require basepath('routes.php');
+
+$router->route($uri,$method);
 
 // print_r($_SERVER['REQUEST_URI']);
 
