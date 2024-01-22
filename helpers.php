@@ -11,8 +11,19 @@ function basepath($path=''){
 
 function loadView($name){
 
+    $path=basepath("views\\$name.view.php");
+
+    if(file_exists($path)){
+
+        require $path;
+
+    }else{
+
+        echo "view $name not found";
+    }
+
     
-    require basepath("views\\$name.view.php");
+    // require basepath("views\\$name.view.php");
 
 
 
