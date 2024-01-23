@@ -8,10 +8,15 @@ loadPartial('navbar');
 // basepath()
 ?>
 
-<?=$name?>
+<?php foreach($listings as $list): ?>
 <div>
-    ring rong
+    <p>id:<?=$list['id']?></p>
+    <p>name:<?=$list['name']?></p>
+    <p>age:<?=$list['age']?></p>
+    
 </div>
+<?php endforeach; ?>
+
 <?php
 
 // include basepath('views\partials\footer.php')
