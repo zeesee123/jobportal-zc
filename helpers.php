@@ -9,11 +9,13 @@ function basepath($path=''){
 
 
 
-function loadView($name){
+function loadView($name,$data=[]){
 
     $path=basepath("views\\$name.view.php");
 
     if(file_exists($path)){
+
+        extract($data);
 
         require $path;
 

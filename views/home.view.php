@@ -7,6 +7,8 @@ loadPartial('head');
 loadPartial('navbar');
 // basepath()
 ?>
+
+<?=$name?>
 <div>
     ring rong
 </div>

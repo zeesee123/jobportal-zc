@@ -1,4 +1,4 @@
 <?php
 
-loadView('listings\index');
+loadView('listings\index',['tommy'=>'Tom']);
 
