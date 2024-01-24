@@ -8,15 +8,15 @@ loadPartial('navbar');
 // basepath()
 ?>
 
-<?php foreach($listings as $list): ?>
+
 <div>
-    <a href="/listing?id=<?=$list->id?>">link</a>
-    <p>id:<?=$list->id?></p>
-    <p>name:<?=$list->name?></p>
-    <p>age:<?=$list->age?></p>
+    <a href="/listing?id=<?=$listings->id?>">link</a>
+    <p>id:<?=$listings->id?></p>
+    <p>name:<?=$listings->name?></p>
+    <p>age:<?=$listings->age?></p>
     
 </div>
-<?php endforeach; ?>
+
 
 <?php
 
