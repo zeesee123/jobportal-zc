@@ -5,12 +5,8 @@
 
 require '../helpers.php';
 
-require basepath('Router.php');
-require basepath('Database.php');
-
-
-
-
+require basepath('Framework\Router.php');
+require basepath('Framework\Database.php');
 
 // inspect($method);
 
