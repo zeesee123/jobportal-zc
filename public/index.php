@@ -5,9 +5,24 @@
 
 require '../helpers.php';
 
-require basepath('Framework\Router.php');
-require basepath('Framework\Database.php');
+// require basepath('Framework\Router.php');
+// require basepath('Framework\Database.php');
 
+//autoloader replacement for classes above that i was requiring before
+
+// spl_autoload_register(function($class){
+
+//     $path=basepath('Framework\\'.$class.'.php');
+
+//     inspect($path);
+
+//     if(file_exists($path)){
+
+//         require $path;
+//     }
+// });
+
+require __DIR__."\..\\vendor\autoload.php";
 // inspect($method);
 
 

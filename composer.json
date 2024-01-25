@@ -1,0 +1,16 @@
+{
+    "name":"zeesee123/jobportal-zc",
+    "description":"job listing app",
+    "authors":[
+        {
+            "name":"Zubin Chadha",
+            "email":"zubinchadha@gmail.com"
+        }
+    ],
+    "autoload":{
+        "psr-4":{
+            "Framework\\":"Framework/",
+            "App\\":"App/"
+        }
+    }
+}

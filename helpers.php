@@ -3,6 +3,7 @@
 
 function basepath($path=''){
 
+    // var_dump($path);
     return __DIR__.'\\'.$path;
 
 }
@@ -10,6 +11,8 @@ function basepath($path=''){
 
 
 function loadView($name,$data=[]){
+
+    
 
     $path=basepath("App\\views\\$name.view.php");
 
