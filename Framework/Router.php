@@ -1,5 +1,6 @@
 <?php
 
+namespace Framework;
 // $routes=require basepath('routes.php');
 
 // if(array_key_exists($uri,$routes)){
@@ -18,9 +19,18 @@ class Router{
 
     protected $routes=[];
 
-    public function registerRoute($method,$uri,$controller){
+    // public function registerRoute($method,$uri,$controller){
 
-        $this->routes[]=['method'=>$method,'uri'=>$uri,'controller'=>$controller];
+    //     $this->routes[]=['method'=>$method,'uri'=>$uri,'controller'=>$controller];
+    // }
+
+    public function registerRoute($method,$uri,$action){
+
+        list($controller,$controllerMethod)=explode('@',$action);
+
+        // inspect($controller);
+
+        $this->routes[]=['method'=>$method,'uri'=>$uri,'controller'=>$controller,'controllerMethod'=>$controllerMethod];
     }
 
 
@@ -50,7 +60,15 @@ class Router{
     public function route($uri,$method){
         foreach($this->routes as $route){
             if($route['uri']===$uri&&$route['method']===$method){
-                require basepath($route['controller']);
+                // require basepath($route['controller']);
+
+                $controller='App\\controllers\\'.$route['controller'];
+                $controllerMethod=$route['controllerMethod'];
+
+                //instantiating the controller instance
+                $controllerInstance=new $controller();
+                $controllerInstance->$controllerMethod();
+
                 return;
             }
         }

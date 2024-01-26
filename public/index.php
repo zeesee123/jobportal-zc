@@ -25,6 +25,8 @@ require '../helpers.php';
 require __DIR__."\..\\vendor\autoload.php";
 // inspect($method);
 
+use Framework\Router;
+
 
 // require basepath('\views\home.view.php');
 // loadView("home");
