@@ -40,16 +40,29 @@ class ListingController{
         loadView('listings\create');
      }
 
-     public function show(){
+     public function show($param){
+
+      // inspectAnDie($param);
 
  
-        $id=$_GET['id']??'';
+      //   $id=$_GET['id']??'';
+
+      
+
+      $id=$param['name']??'';
+
+      // inspect($id);
 
         $params=['id'=>$id];
         // $listings=$db->query('SELECT * FROM listing')->fetchAll(PDO::FETCH_ASSOC);
         $listings=$this->db->query('SELECT * FROM listing where id=:id',$params)->fetch();//just use fetch instead of fetchAll if there is a single listing involved
         // $listings=$db->query('SELECT * FROM listing')->fetchAll();
         
+        if(!$listings){
+
+         ErrorController::notFound();
+         return;
+        }
         // inspect($listings);
         
         loadView('listings\show',['listings'=>$listings]);

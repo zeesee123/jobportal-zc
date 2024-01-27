@@ -16,10 +16,18 @@ class ErrorController{
     //     $this->db=new Database($config);
     // }
 
-    public function index(){
+    // public function index(){
 
 
-        loadView('errors/404');
+    //     loadView('errors/404');
+    // }
+
+    public static function notFound($message="Resource not found"){
+
+        http_response_code('404');
+
+        loadView('errors/404',['status'=>'404','message'=>$message]);
+
     }
 }
 

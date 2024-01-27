@@ -1,6 +1,8 @@
 <?php
 
 namespace Framework;
+
+use App\controllers\ErrorController;
 // $routes=require basepath('routes.php');
 
 // if(array_key_exists($uri,$routes)){
@@ -57,23 +59,75 @@ class Router{
 
     /**route the request */
 
-    public function route($uri,$method){
+    // public function route($uri,$method){
+
+    public function route($uri){
+
+            // print_r($_SERVER);
+            // inspect($_SERVER);
+
+        $requestMethod=$_SERVER['REQUEST_METHOD'];
+        // inspect($requestMethod);
+        // inspect(trim($uri,'/'));
+        // inspect(explode('/',$requestMethod));
+
         foreach($this->routes as $route){
-            if($route['uri']===$uri&&$route['method']===$method){
-                // require basepath($route['controller']);
 
-                $controller='App\\controllers\\'.$route['controller'];
-                $controllerMethod=$route['controllerMethod'];
+            $uriSegments=explode('/',trim($uri,'/'));
 
-                //instantiating the controller instance
-                $controllerInstance=new $controller();
-                $controllerInstance->$controllerMethod();
+            //splitting the route URI into segments
+            $routeSegments=explode('/',trim($route['uri'],'/'));
 
-                return;
+            $match=true;
+
+            if(count($uriSegments)===count($routeSegments) && strtoupper($route['method'])===$requestMethod){
+
+                $params=[];
+                $match=true;
+
+                for($i=0;$i<count($uriSegments);$i++){
+
+                    if($routeSegments[$i]!==$uriSegments[$i] && !preg_match('/\{(.+?)\}/',$routeSegments[$i])){
+
+                        $match=false;
+                        break;
+                    }
+
+                    if(preg_match('/\{(.+?)\}/',$routeSegments[$i],$matches)){
+                        // inspectAnDie($matches);
+                        $params[$matches[1]]=$uriSegments[$i];
+                        // inspectAnDie($params);
+                    }
+
+                }
+
+                if($match){
+                    $controller='App\\controllers\\'.$route['controller'];
+                    $controllerMethod=$route['controllerMethod'];
+    
+                    //instantiating the controller instance
+                    $controllerInstance=new $controller();
+                    // inspectAnDie($params);
+                    $controllerInstance->$controllerMethod($params);
+
+                    return;
+                }
             }
+            // inspect($uriSegments);
+            // if($route['uri']===$uri&&$route['method']===$reqestMethod){
+            //     // require basepath($route['controller']);
+
+            //     $controller='App\\controllers\\'.$route['controller'];
+            //     $controllerMethod=$route['controllerMethod'];
+
+            //     //instantiating the controller instance
+            //     $controllerInstance=new $controller();
+            //     $controllerInstance->$controllerMethod();
+
+            //     return;
+            // }
         }
-        http_response_code(404);
-        loadView('errors\404');
-        exit;
+        
+        ErrorController::notFound();
     }
 }

@@ -10,7 +10,7 @@ loadPartial('navbar');
 
 
 <div>
-    <a href="/listing?id=<?=$listings->id?>">link</a>
+    <a href="/listing/<?=$listings->id?>">link</a>
     <p>id:<?=$listings->id?></p>
     <p>name:<?=$listings->name?></p>
     <p>age:<?=$listings->age?></p>
