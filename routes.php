@@ -5,6 +5,7 @@
 $router->get('/','HomeController@index');
 $router->get('/listings','ListingController@index');
 $router->get('/listings/create','ListingController@create');
+$router->post('/listings/create','ListingController@store');
 // $router->get('404','ErrorController@index');
 $router->get('/listing/{name}','ListingController@show');
 // $router->get('/','App\controllers\home.php');

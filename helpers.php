@@ -60,3 +60,8 @@ function inspectAnDie($value){
     die(var_dump($value));
     echo '</pre>';
 }
+
+function sanitize($val){
+
+    return htmlspecialchars($val);
+}

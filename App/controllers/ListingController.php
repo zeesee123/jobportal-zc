@@ -3,6 +3,7 @@
 namespace App\controllers;
 
 use Framework\Database;
+use Framework\Validation;
 
 class ListingController{
 
@@ -17,6 +18,8 @@ class ListingController{
     }
 
     public function index(){
+
+        inspectAnDie(Validation::email('kk@cc.com'));
 
 
        // $listings=$db->query('SELECT * FROM listing')->fetchAll(PDO::FETCH_ASSOC);
@@ -66,6 +69,41 @@ class ListingController{
         // inspect($listings);
         
         loadView('listings\show',['listings'=>$listings]);
+     }
+
+     
+     public function store(){
+
+        $allowedField=['title','desc','salary','req','benefit'];
+
+        $newList=array_intersect_key($_POST,array_flip($allowedField));
+
+        $newList=array_map('sanitize',$newList);
+
+        $requiredField=['title','desc','salary'];
+
+        $errors=[];
+
+        foreach($requiredField as $field){
+
+            if(empty($newList[$field])||!Validation::string(($newList[$field]))){
+
+                $errors[$field]=ucfirst($field).' is required';
+
+            }
+        }
+
+        // inspectAnDie($errors);
+        if(empty($errors)){
+
+        }else{
+
+            loadView('listings\create',['errors'=>$errors,'data'=>$newList]);
+        }
+
+        // inspect($newList);
+
+        // inspect($_POST);
      }
 }
 
