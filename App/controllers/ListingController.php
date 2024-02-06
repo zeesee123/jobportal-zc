@@ -96,6 +96,27 @@ class ListingController{
         // inspectAnDie($errors);
         if(empty($errors)){
 
+            $this->db->query('INSERT INTO listings (title,description,salary) VALUES (:title,:description,:salary)',$newList);
+
+            $fields=[];
+
+            foreach($newList as $key=>$value){
+                $fields[]=$key;
+            }
+
+            $fields=implode(',',$fields);
+
+            $values=[];
+
+            foreach($newList as $key=>$value){
+                if($value===''){
+                    $newList[$key]=null;
+                }
+                $values[]=':'.$field;
+            }
+
+            $values=implode(',',$values);
+
         }else{
 
             loadView('listings\create',['errors'=>$errors,'data'=>$newList]);
